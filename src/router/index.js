@@ -28,7 +28,7 @@ export default new Router({
     routes: [{
             path: '/',
             name: 'HelloWorld',
-            redirect: '/login'
+            redirect: '/find-music'
         },
         {
             path: '/login',

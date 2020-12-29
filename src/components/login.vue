@@ -69,7 +69,7 @@ export default {
                         let url1='http://localhost:3000/captcha/verify?phone='+this.formData.userName+'&captcha='+this.formData.yanzma
                         let that=this
                         let list=[]
-                        // axios.get(url1).then(function(result){
+                        axios.get(url1).then(function(result){
                             axios.get(url).then(function(result){
                             that.user=result.data.profile
                             that.$store.dispatch('getChangeuserId',that.user.userId)
@@ -89,19 +89,19 @@ export default {
                                     message:'账号或密码错误，请检查后重新登录!'
                                 })     
                                 });
-                        // }).catch(function(error){
-                        //     if(that.formData.yanzma){
-                        //         that.$message({
-                        //               type:'error',
-                        //               message:'验证错误!请重新输入!'
-                        //           }) 
-                        //     }else if(!that.formData.yanzma){
-                        //         that.$message({
-                        //               type:'error',
-                        //               message:'请填写验证码!'
-                        //           }) 
-                        //     }
-                        // })
+                        }).catch(function(error){
+                            if(that.formData.yanzma){
+                                that.$message({
+                                      type:'error',
+                                      message:'验证错误!请重新输入!'
+                                  }) 
+                            }else if(!that.formData.yanzma){
+                                that.$message({
+                                      type:'error',
+                                      message:'请填写验证码!'
+                                  }) 
+                            }
+                        })
                        
                     }
 				} else {
@@ -120,22 +120,25 @@ export default {
             var btn = document.querySelector('#btn');
             var timer = 60;
             btn.addEventListener('click', function() {
-            btn.disabled = true;
-            var tima = setInterval(function() {
-                if (timer == 0) {
-                    clearInterval(tima);
-                    btn.disabled = false;
-                    btn.innerHTML = '获取验证码';
-                    timer = 60;
-                } else {
-                    btn.innerHTML =timer + '秒后可重发'
-                    timer--;
-                }
-            }, 1000)
+                btn.disabled = true;
+               
+                var tima = setInterval(function() {
+                    if (timer == 0) {
+                        clearInterval(tima);
+                        btn.disabled = false;
+                        btn.innerHTML = '获取验证码';
+                        timer = 60;
+                    } else {
+                        btn.innerHTML =timer + '秒后可重发'
+                        timer--;
+                    }
+                }, 1000)
+                
           });
             let that=this
             let url='http://localhost:3000/captcha/sent?phone='+this.formData.userName
             axios.get(url).then(function(result){
+                
                 that.$message({
                     type:'success',
                     message:'验证码已发送，注意查收哦!'

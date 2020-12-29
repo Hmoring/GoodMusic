@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="singer">
-            <div class="name">基督教简介
+            <div class="name">简介
                 <div class="box"></div>
             </div>
             <div class="singerText">
