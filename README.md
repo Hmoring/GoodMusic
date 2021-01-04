@@ -11,5 +11,5 @@ https://github.com/Hmoring/GoodMusic.git
 $ npm install
 ##
 $ npm run dev
-
-
+##
+功能还未全部完成，将会持续更新和优化！
