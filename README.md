@@ -1,8 +1,6 @@
-# music
+# GoodMusic
 
 > A Vue.js project
-
-## Build Setup
 
 ## 需要自行搭建后台，请自行下载
 [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
