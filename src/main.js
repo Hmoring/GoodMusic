@@ -12,6 +12,7 @@ import store from './store/store.js'
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
+axios.defaults.withCredentials = true
 Vue.use(ElementUI)
 Vue.prototype.utils = utils
     /* eslint-disable no-new */

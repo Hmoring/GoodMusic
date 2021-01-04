@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="{display:bujianle}">
         <div class="boxbb">
             <el-button class="btn" @click="dis">{{firstName}}&nbsp;&nbsp;<i class="el-icon-arrow-down"></i></el-button>
             <div class="box-text">
@@ -62,6 +62,7 @@ export default {
         return{
             disabled:false,
             munLists:[],
+            bujianle:'none',
             pageInfo:{
                 pageIndex:1,
                 pageSize:8,
@@ -134,7 +135,7 @@ export default {
             this.load=true
             let url='http://localhost:3000/video/timeline/all?offset='+this.offset
             let that=this
-            axios.get(url,{withCredentials: true}).then(function(result){
+            axios.get(url,{withCredentials: true }).then(function(result){
                 // console.log(result);
                 that.Allvideo=result.data.datas.map(item=>{
                     return item.data
@@ -228,12 +229,48 @@ export default {
                 this.need.order='new'
                 this.getTese()
             }
+        },
+         testingUser(){
+            if(this.list){
+                 this.bujianle='inline'
+                 this.getAllvidedo()
+            }else{
+                this.$confirm('此操作需要登录您的网易云音乐账号, 是否登录?', '提示', {
+                    confirmButtonText: '登录',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                    center: true
+                }).then(() => { 
+                     this.$router.push({
+                        path: '/login'
+                    })
+                }).catch(() => {
+                    this.bujianle='none'
+                    this.$message({
+                        type: 'info',
+                        message: '已取消登录'
+                    });
+                });
+            
+        }
+        }
+    },
+    computed:{
+        list(){
+            return this.$store.state.userId
+            
+        }
+    },
+    watch:{
+        list(){
+            this.testingUser()
         }
     },
     mounted(){
         this.getlist()
         this.getFenlei()
-        this.getAllvidedo()
+       
+        this.testingUser()
         // this.getFenleiVideo()
         
     }
