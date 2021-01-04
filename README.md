@@ -9,7 +9,9 @@
 
 ## 安装运行
 https://github.com/Hmoring/GoodMusic.git
+##
 $ npm install
+##
 $ npm run dev
 
 
